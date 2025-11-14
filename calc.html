@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Result</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="result-container">
+        <div class="resultCard">
+            <div class="iconDisplay"></div>
+            <h1 class="ipDisplay"></h1>
+            <div class="resultDisplay">
+                <h2></h2>
+            </div>
+            <a href="/" class="back-btn">
+                <i class="fas fa-arrow-left me-2"></i> Calculate Another IP
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function convertBin(dec) {
+            return (dec >>> 0).toString(2);
+        }
+
+        const params = new URLSearchParams(window.location.search);
+        const ip = params.get('net');
+
+        let result = "";
+
+        const iconDisplay = document.querySelector(".iconDisplay");
+        const ipDisplay = document.querySelector(".ipDisplay");
+        const resultDisplay = document.querySelector(".resultDisplay");
+
+        if (!ip) {
+            iconDisplay.innerHTML = `<i class="fas fa-exclamation-circle error-icon"></i>`;
+            result = "No IP provided please provide an IP"
+        } else {
+            const len = ip.length;
+            const isValidIP = /^(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})(\.(25[0-5]|2[0-4][0-9]|1?[0-9]{1,2})){3}$/;
+            let frst_ip = "";
+
+            for (let i = 0; i < len; i++) {
+                if (ip[i] === ".") break;
+                frst_ip += ip[i];
+            }
+
+            if (!isValidIP.test(ip)) {
+                iconDisplay.innerHTML = `<i class="fas fa-times-circle error-icon"></i>`;
+            } else {
+                iconDisplay.innerHTML = `<i class="fas fa-check-circle success-icon"></i>`;
+            }
+                const final_ip = convertBin(frst_ip).slice(0, 4);
+
+                switch (final_ip) {
+                    case "0000":
+                    case "0001":
+                    case "0010":
+                    case "0011":
+                    case "0100":
+                    case "0101":
+                    case "0110":
+                    case "0111":
+                        result = "Your IP is class A with a 255.0.0.0 netmask.";
+                        break;
+
+                    case "1000":
+                    case "1001":
+                    case "1010":
+                    case "1011":
+                        result = "Your IP is class B with a 255.255.0.0 netmask";
+                        break;
+
+                    case "1100":
+                    case "1101":
+                        result = "Your IP is class C with a 255.255.255.0 netmask.";
+                        break;
+
+                    case "1110":
+                        result = "Your IP is class D (Multicast).";
+                        break;
+
+                    case "1111":
+                        result = "Your IP is class E (Experimental/Reserved).";
+                        break;
+
+                    default:
+                        result = "Could not determine IP class.";
+                        break;
+                }
+            }
+            ipDisplay.innerHTML = `Your IP is: ${ip}`;
+            resultDisplay.innerHTML = result;
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

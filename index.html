@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Calculator</title>
+    <link rel="icon" type="image/x-icon" href="static/favicon.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div id="window">
+        <div class="main-card">
+            <i class="fas fa-network-wired ip-icon"></i>
+            <h1 class="Title">IP Calculator</h1>
+            <p id="explanation">This Website will display the netmask and the class of a certain IP.</p>
+            <br>
+            <div class="form-section">
+                <h2>Provide an IP</h2>
+                <form action="calc.html" method="get">
+                    <div class="mb-3">
+                        <label for="ip" class="form-label">Enter a Valid IP:</label><br>
+                        <input type="text" class="form-control" id="ip" name="net" placeholder="e.g. 192.168.1.1"><br>
+                    </div>
+                    <button type="submit" class="btn btn-submit">SUBMIT</button><br><br>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
