@@ -5,7 +5,7 @@ A simple web application that provides IPv4-related tool via a web interface.
 ## Features
 
 - Web-based IPv4 tool
-- Simple UI with `index.html` and `calc.html
+- Simple UI with `index.html` and `calc.html`
   
 ## Prerequisites
 - No prerequisites just just standard Web Server (Apache/Nginx)
